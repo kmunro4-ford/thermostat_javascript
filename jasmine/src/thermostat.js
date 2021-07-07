@@ -4,7 +4,7 @@ class Thermostat {
     this.temp = 20
     this.ps = true
   }
-  
+
   up() {
     if (this.ps) {
       if (this.temp >= 25) {
@@ -32,21 +32,21 @@ class Thermostat {
   }
   energyUsage() {
     if (this.temp < 18) {
-      return "low_usage";
+      return "low-usage";
     } else if (this.temp <= 25) {
       return "medium-usage";
     } else {
       return "high-usage"
     }
   }
-  switchPS() {
-    if (this.ps) {
-      this.ps = false;
-      return this.ps;
-    } else {
-      this.ps = true;
-      return this.ps;
-    }
+  switchPSOn() {
+    return this.ps = true;
+  }
+  switchPSOff() {
+    return this.ps = false;
+  }
+  getPSMode() {
+    return this.ps;
   }
 
 }

@@ -22,22 +22,35 @@ describe('Thermostat', () => {
       thermostat.temp = 25;
       expect(thermostat.up()).toEqual("Max temp reach for power saving mode");
     });
+    it('Checks that PS Mode is set to off when requested', () => {
+      thermostat.switchPSOff();
+      expect(thermostat.getPSMode()).toEqual(false)
+    })
     it('If power saving mode is off max temp is 32 degrees', () => {
-      let test;
-      test = new Thermostat();
-      test.switchPS;
-      test.temp = 32;
-      expect(test.up()).toEqual("Max temp reached");
+      thermostat.temp = 32;
+      thermostat.switchPSOff();
+      expect(thermostat.up()).toEqual("Max temp reached");
     });
     it('Power saving mode is on by default', () => {
       expect(thermostat.ps).toEqual(true);
     });
     it('Reset feature puts the temp back to 20 degrees', () => {
-      thermostat.temp = 25
+      thermostat.temp = 25;
       expect(thermostat.reset()).toEqual(20);
     });
+    it('Returns low-usage when temp is set below 18', () => {
+      thermostat.temp = 17;
+      expect(thermostat.energyUsage()).toEqual("low-usage")
+    });
+    it('Returns medium-usage when temp is set below 25', () => {
+      thermostat.temp = 24;
+      expect(thermostat.energyUsage()).toEqual("medium-usage")
+    });
+    it('Returns high-usage when temp is set above 25', () => {
+      thermostat.temp = 28;
+      expect(thermostat.energyUsage()).toEqual("high-usage")
+    });
   });
-
 });
 
 // Thermostat starts at 20 degrees
