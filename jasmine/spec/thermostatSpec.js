@@ -8,12 +8,14 @@ describe('Thermostat', () => {
     it('Starts at a temp of 20 degrees', () => {
       expect(thermostat.temp).toEqual(20);
     });
+
     it('Allows a user to increase temp with an up function', () => {
       expect(thermostat.up()).toEqual(21);
     });
     it('Allows a user to increase temp with a down function', () => {
       expect(thermostat.down()).toEqual(19);
     });
+
     it('Minimum temp is 10 degrees', () => {
       thermostat.temp = 10;
       expect(thermostat.down()).toEqual("Minimum temp reached");
@@ -22,22 +24,25 @@ describe('Thermostat', () => {
       thermostat.temp = 25;
       expect(thermostat.up()).toEqual("Max temp reach for power saving mode");
     });
-    it('Checks that PS Mode is set to off when requested', () => {
-      thermostat.switchPSOff();
-      expect(thermostat.getPSMode()).toEqual(false)
-    })
     it('If power saving mode is off max temp is 32 degrees', () => {
       thermostat.temp = 32;
       thermostat.switchPSOff();
       expect(thermostat.up()).toEqual("Max temp reached");
     });
+
     it('Power saving mode is on by default', () => {
       expect(thermostat.ps).toEqual(true);
     });
+    it('Checks that PS Mode is set to off when requested', () => {
+      thermostat.switchPSOff();
+      expect(thermostat.getPSMode()).toEqual(false)
+    });
+
     it('Reset feature puts the temp back to 20 degrees', () => {
       thermostat.temp = 25;
       expect(thermostat.reset()).toEqual(20);
     });
+    
     it('Returns low-usage when temp is set below 18', () => {
       thermostat.temp = 17;
       expect(thermostat.energyUsage()).toEqual("low-usage")
