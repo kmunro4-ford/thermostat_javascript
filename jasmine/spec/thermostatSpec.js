@@ -42,7 +42,7 @@ describe('Thermostat', () => {
       thermostat.temp = 25;
       expect(thermostat.reset()).toEqual(20);
     });
-    
+
     it('Returns low-usage when temp is set below 18', () => {
       thermostat.temp = 17;
       expect(thermostat.energyUsage()).toEqual("low-usage")
